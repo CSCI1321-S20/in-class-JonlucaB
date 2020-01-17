@@ -44,4 +44,6 @@ class ImmutableStudent (
   def testAverage: Double = if(tests.isEmpty) 0.0 
     else test.sum.toDouble / tests.length
   def average: Double = quizAverage*0.1 + assignmentAverage*0.5 + testAverage*0.4
+
+  //test
 }
