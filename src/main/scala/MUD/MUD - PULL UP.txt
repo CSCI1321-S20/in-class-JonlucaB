@@ -1,0 +1,90 @@
+﻿For your first assignment, you will be writing a nicely object-oriented text adventure. This is your first step in creating a MUD, and it will give you some practice in thinking about how you create systems using an OO approach.
+
+
+To see what a MUD is like, I recommend that you try SlothMUD. You can get to it by running the following in a terminal.
+telnet slothmud.org 6101
+Playing this game for a while is a good way to get a feel for what I expect in your project. In particular, pay attention to how the commands work and what gameplay is like.
+
+
+Analysis:
+Your code will need to support the following commands
+* north, south, east, west, up, down - for movement (it is nice if you allow single letter abbreviations)
+* look - reprints the description of the current room
+* inv/inventory - list the contents of your inventory
+* get item - to get an item from the room and add it to your inventory
+* drop item - to drop an item from your inventory into the room.
+* exit - leave the game
+* help - print the available commands and what they do
+
+
+When you move to a room, the description of that room should print. The description needs to not only have the human written text, but it should also list, based on data, the exits, and the items in the room (see Output Format below).
+
+
+Design:
+You need to include the following classes and methods in your solution. You can include other things as needed. You might even change the signatures a bit. I’m just giving this to you as a suggestion. You must have all these classes. You might vary the methods.
+
+
+* object Main
+   * def main(args: Array[String]): Unit - This is the main method that runs the game. It needs to make a Player and do other setup. For this assignment, it will then have a loop that reads input and processes the command until the user types in “exit”.
+* class Player
+   * def processCommand(command: String): Unit - Parse and act on a command
+   * def getFromInventory(itemName: String): Option[Item] - Pull an item out of the inventory (if it exists) and return it.
+   * def addToInventory(item: Item): Unit - Add the given item to inventory.
+   * def inventoryListing(): String - Build a String with the contents of the inventory for printing.
+   * def move(dir: String): Unit - Move the player in a particular direction if possible.
+* class Room
+   * def description(): String - Build a String with the description of the room for printing. Note this is the full printed description with the name, items, and exits.
+   * def getExit(dir: Int): Option[Room] - Return the room that is reached by going in a particular direction if there is an exit in that direction.
+   * def getItem(itemName: String): Option[Item] - Pull an item from the room if it is there and return it. Note that if an item is returned, it should no longer be in the room.
+   * def dropItem(item: Item): Unit - Add an item to this room.
+* class Item
+   * No methods required just data for name and description.
+
+
+My solution to this assignment included a companion object for most of the classes. The map needs to be stored in a file. I stored my map data in XML and put apply methods in the companion objects to parse out the XML. You can use flat files for now if you prefer. In the Room companion object, I keep an Array[Room] that stores all the rooms. Then in the Room class, I give each room a member called exits: Array[Option[Int]] where the index determines the direction. So perhaps north=0, south=1, east=2, west=3, up=4, and down=5. That numeric direction is what gets passed into the getExit method of Room.
+
+
+Coding Standards:
+Each of the elements above needs to be in a different file. Put it all in a package called mud.
+
+
+All mutable data must be private. This means that all vars are private, but so are mutable values like Arrays.
+
+
+Output Format:
+In order for your MUD to be compatible with the MUDTester, your output must follow a set format. Later in the course, you will learn about Regular Expressions and will be able to change this, but for it must be very specific. Output for room descriptions should be in the following format:
+
+
+Room Name
+Room Description
+Exits: exit1, exit2
+Items: item1, item2
+
+
+The “Items” line is optional and may be excluded from a particular room description if that room contains no items. A sample room description might look like:
+
+
+Caravan Gate of Tyr
+You stand at the main gates of the city of Tyr. To the east lays the caravan road 
+heading out into the deserts of Athas. To the west lies the city itself. You
+can see Kalak's Ziggurat looming behind the buildings along the road.
+Exits: east, west
+Items: sword
+
+
+If there are no items, print “Items: None”. There should always be exits.
+
+
+Output for inventory should follow the format:
+
+
+Inventory:
+    Item1 - item1 description
+    Item2 - item2 description
+
+
+And a sample might look like:
+
+
+Inventory:
+    Notebook - a place for writing notes about your travels
