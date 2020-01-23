@@ -88,3 +88,8 @@ And a sample might look like:
 
 Inventory:
     Notebook - a place for writing notes about your travels
+
+We will compose the exists as this:
+
+0, 1, 2, 3, 4, 5
+n, s, e, w, u, d
