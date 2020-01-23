@@ -1,5 +1,3 @@
 package MUD
 
-class Item {
-
-}
+case class Item(name: String, desc: String)
