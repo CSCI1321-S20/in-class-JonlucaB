@@ -1,4 +1,4 @@
-package oobasics
+/*package oobasics
 //immutable because the grades are all vals, so unchangeable
 class ImmutableStudent (
     val firstName: String, 
@@ -46,4 +46,4 @@ class ImmutableStudent (
   def average: Double = quizAverage*0.1 + assignmentAverage*0.5 + testAverage*0.4
 
   //test
-}
+}*/
