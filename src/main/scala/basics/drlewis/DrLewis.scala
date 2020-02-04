@@ -18,7 +18,13 @@ object DrLewis extends JFXApp {
       content = canvas
       renderer.render(grid)
 
+      val lastTime = -1L
       val timer = AnimationTimer(time => {
+          if (lastTime >= 0) {
+              val delay = time - lastTime
+              println(delay)
+          }
+          lastTime = time
           println(time)
       })
       timer.start
