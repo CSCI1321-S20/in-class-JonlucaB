@@ -1,4 +1,3 @@
- 
 package drlewio
 
 import scalafx.scene.canvas.GraphicsContext
